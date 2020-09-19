@@ -14,8 +14,11 @@ namespace TrashCollector.Models
         public int Id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string address { get; set; }
-      
+        public string EmployeeStreet { get; set; }
+        public string EmployeeCity { get; set; }
+        public string EmployeeState { get; set; }
+        public string EmployeeZipCode { get; set; }
+
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
