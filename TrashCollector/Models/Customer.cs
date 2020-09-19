@@ -18,6 +18,7 @@ namespace TrashCollector.Models
         public string CustomersCity { get; set; }
         public string CustomersState { get; set; }
         public string CustomersZipCode { get; set; }
+        public string CustomersCordinates { get; set; }
         //adjustment to location if needed (pin drop?)
         public string initialPickUp { get; set; }
         public string additionPickup { get; set; } 
