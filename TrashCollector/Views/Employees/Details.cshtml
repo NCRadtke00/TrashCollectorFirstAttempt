@@ -1,4 +1,4 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model TrashCollector.Models.Employee
 
 @{
     ViewData["Title"] = "Details";
@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Customer</h4>
+    <h4>Employee</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -28,30 +28,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pickup)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pickup)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.additionPickup)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.additionPickup)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bill)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bill)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.hasTrashBeenCollected)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.hasTrashBeenCollected)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdentityUser)

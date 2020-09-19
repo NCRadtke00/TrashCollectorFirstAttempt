@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector.Models.Customer>
+﻿@model IEnumerable<TrashCollector.Models.Employee>
 
 @{
     ViewData["Title"] = "Index";
@@ -23,18 +23,6 @@
                 @Html.DisplayNameFor(model => model.address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.pickup)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.additionPickup)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.bill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.hasTrashBeenCollected)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
@@ -51,18 +39,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pickup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.additionPickup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bill)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hasTrashBeenCollected)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdentityUser.Id)
