@@ -13,6 +13,5 @@ namespace TrashCollector.Models
         public List<Customer> dayPicked { get; set; }
         public bool wasTrashPickedUp { get; set; }
 
-
     }
 }

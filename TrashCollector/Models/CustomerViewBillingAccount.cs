@@ -9,6 +9,7 @@ namespace TrashCollector.Models
     {
         public Customer customer { get; set; }
         public double customerBill { get; set; }
+        //bill needs to have inital trash pick up + recycling fee + latefee
 
     }
 }
