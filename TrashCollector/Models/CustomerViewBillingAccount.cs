@@ -8,7 +8,7 @@ namespace TrashCollector.Models
     public class CustomerViewBillingAccount
     {
         public Customer customer { get; set; }
-        public double customerBill { get; set; }
+        public double bill { get; set; }
         //bill needs to have inital trash pick up + recycling fee + latefee
 
     }

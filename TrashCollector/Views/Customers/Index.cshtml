@@ -20,19 +20,40 @@
                 @Html.DisplayNameFor(model => model.lastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.address)
+                @Html.DisplayNameFor(model => model.street)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.pickup)
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cordinates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.initialPickUp)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.additionPickup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.discontinuePickUps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pausePickUps)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.bill)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.hasTrashBeenCollected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.wasRecyclingPickedUp)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdentityUser)
@@ -50,19 +71,40 @@
                 @Html.DisplayFor(modelItem => item.lastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.address)
+                @Html.DisplayFor(modelItem => item.street)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.pickup)
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cordinates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.initialPickUp)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.additionPickup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.discontinuePickUps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pausePickUps)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.bill)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.hasTrashBeenCollected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.wasRecyclingPickedUp)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdentityUser.Id)

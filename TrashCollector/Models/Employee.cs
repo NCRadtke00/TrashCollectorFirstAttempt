@@ -14,10 +14,10 @@ namespace TrashCollector.Models
         public int Id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string EmployeeStreet { get; set; }
-        public string EmployeeCity { get; set; }
-        public string EmployeeState { get; set; }
-        public string EmployeeZipCode { get; set; }
+        public string street { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string zipCode { get; set; }
 
 
         [ForeignKey("IdentityUser")]

@@ -24,22 +24,58 @@
             @Html.DisplayFor(model => model.lastName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.street)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.address)
+            @Html.DisplayFor(model => model.street)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pickup)
+            @Html.DisplayNameFor(model => model.city)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pickup)
+            @Html.DisplayFor(model => model.city)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.zipCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.zipCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cordinates)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cordinates)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.initialPickUp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.initialPickUp)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.additionPickup)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.additionPickup)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.discontinuePickUps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.discontinuePickUps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pausePickUps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pausePickUps)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.bill)
@@ -52,6 +88,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.hasTrashBeenCollected)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.wasRecyclingPickedUp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.wasRecyclingPickedUp)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdentityUser)
