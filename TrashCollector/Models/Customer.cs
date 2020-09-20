@@ -20,8 +20,6 @@ namespace TrashCollector.Models
         public string discontinuePickUps { get; set; }
         public string pausePickUps { get; set; }
         public double bill { get; set; }
-        public bool hasTrashBeenCollected { get; set; }
-        public bool wasRecyclingPickedUp { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
