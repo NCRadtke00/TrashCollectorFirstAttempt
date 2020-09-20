@@ -21,7 +21,7 @@ namespace TrashCollector.Models
         public DateTime PickUpDate { get; set; }
         public bool employeeCollectedTrash { get; set; }
         public bool employeeCollectedRecycling { get; set; }
-        public bool customerWasTrashCollected { get; set; }
-        public bool custoemrWasRecyclingCollected { get; set; }
+        public bool customerTrashWasNotCollected { get; set; }
+        public bool customerRecyclingWasNotCollected { get; set; }
     }
 }
