@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TrashCollector.Models.PickUp>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customerTrashWasNotCollected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customerRecyclingWasNotCollected)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.employee.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customers.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerTrashWasNotCollected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerRecyclingWasNotCollected)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
