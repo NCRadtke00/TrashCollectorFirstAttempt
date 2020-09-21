@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
+
 namespace TrashCollector.Controllers
 {
     public class EmployeesController : Controller
@@ -23,6 +24,7 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             //var applicationDbContext = _context.Employees.Include(e => e.IdentityUser).Single();
