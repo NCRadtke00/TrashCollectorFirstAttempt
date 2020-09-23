@@ -12,13 +12,14 @@ namespace TrashCollector.Models
     {
         [Key]
         public int PickUpId { get; set; }
-        public Employee employee { get; set; } 
+        public Employee Employee { get; set; } 
         public string dayOfPickUp { get; set; }
         public DateTime? PickUpDay { get; set; } 
         public bool customerTrashWasNotCollected { get; set; }
         public bool customerRecyclingWasNotCollected { get; set; }
         public DateTime? discontinuePickUps { get; set; }
         public DateTime? pausePickUps { get; set; }
+        public double bill { get; set; }
 
         [ForeignKey("customer")]
         public int customersId { get; set; }
@@ -27,11 +28,5 @@ namespace TrashCollector.Models
         [ForeignKey("employee")]
         public int employeesId { get; set; }
         public Employee employees { get; set; }
-
-      
-        
- 
-
-
     }
 }

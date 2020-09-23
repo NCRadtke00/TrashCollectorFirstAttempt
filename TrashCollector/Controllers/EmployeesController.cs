@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrashCollector.Data;
 using TrashCollector.Models;
-
 
 namespace TrashCollector.Controllers
 {
@@ -24,15 +22,8 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
-            //var applicationDbContext = _context.Employees.Include(e => e.IdentityUser).Single();
-            var customersInZipCode = _context.Customers.Where(c => c.zipCode == employeeLoggedIn.zipCode).ToList();
-            var today = DateTime.Now.DayOfWeek.ToString();
-            var customersInZipAndToday = customersInZipCode.Where(c => c.PickUp.Day == today).ToList();
-            //ViewData["Customers"] = customers.ToList();
-            return View();
+            var applicationDbContext = _context.Employees.Include(e => e.Address).Include(e => e.IdentityUser);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -44,6 +35,7 @@ namespace TrashCollector.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.Address)
                 .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
@@ -57,10 +49,9 @@ namespace TrashCollector.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            //var employee = new Employee();
             return View();
-            //return View(employee);
         }
 
         // POST: Employees/Create
@@ -68,35 +59,33 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,street,city,state,zipCode,IdentityUserId")] Employee employee)
-        //public async IActionResult Create([Bind("Id,firstName,lastName,street,city,state,zipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,phoneNumber,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                //employee.IdentityUserId = userId;
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                //_context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", employee.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return View(employee);
         }
 
-        //GET: Employees/Edit/5
-        public IActionResult Edit(int? id)
+        // GET: Employees/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = _context.Employees.Where(e => e.Id == id).SingleOrDefault();
+            var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", employee.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return View(employee);
         }
@@ -106,7 +95,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,street,city,state,zipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,phoneNumber,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -133,6 +122,7 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", employee.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return View(employee);
         }
@@ -146,6 +136,7 @@ namespace TrashCollector.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.Address)
                 .Include(e => e.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)

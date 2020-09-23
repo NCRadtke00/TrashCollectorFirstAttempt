@@ -10,23 +10,22 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    public class PickUpsController : Controller
+    public class AddressesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PickUpsController(ApplicationDbContext context)
+        public AddressesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: PickUps
+        // GET: Addresses
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PickUps.Include(p => p.employees);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Addresses.ToListAsync());
         }
 
-        // GET: PickUps/Details/5
+        // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var pickUp = await _context.PickUps
-                .Include(p => p.employees)
-                .FirstOrDefaultAsync(m => m.PickUpId == id);
-            if (pickUp == null)
+            var address = await _context.Addresses
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(pickUp);
+            return View(address);
         }
 
-        // GET: PickUps/Create
+        // GET: Addresses/Create
         public IActionResult Create()
         {
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id");
             return View();
         }
 
-        // POST: PickUps/Create
+        // POST: Addresses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PickUpId,dayOfPickUp,PickUpDay,customerTrashWasNotCollected,customerRecyclingWasNotCollected,discontinuePickUps,pausePickUps,bill,customersId,employeesId")] PickUp pickUp)
+        public async Task<IActionResult> Create([Bind("Id,streetAddress,apartmantOrSuiteNumber,cityName,stateName,zipCode,cordinates")] Address address)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pickUp);
+                _context.Add(address);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
-            return View(pickUp);
+            return View(address);
         }
 
-        // GET: PickUps/Edit/5
+        // GET: Addresses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var pickUp = await _context.PickUps.FindAsync(id);
-            if (pickUp == null)
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
-            return View(pickUp);
+            return View(address);
         }
 
-        // POST: PickUps/Edit/5
+        // POST: Addresses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PickUpId,dayOfPickUp,PickUpDay,customerTrashWasNotCollected,customerRecyclingWasNotCollected,discontinuePickUps,pausePickUps,bill,customersId,employeesId")] PickUp pickUp)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,streetAddress,apartmantOrSuiteNumber,cityName,stateName,zipCode,cordinates")] Address address)
         {
-            if (id != pickUp.PickUpId)
+            if (id != address.Id)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace TrashCollector.Controllers
             {
                 try
                 {
-                    _context.Update(pickUp);
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PickUpExists(pickUp.PickUpId))
+                    if (!AddressExists(address.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
-            return View(pickUp);
+            return View(address);
         }
 
-        // GET: PickUps/Delete/5
+        // GET: Addresses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var pickUp = await _context.PickUps
-                .Include(p => p.employees)
-                .FirstOrDefaultAsync(m => m.PickUpId == id);
-            if (pickUp == null)
+            var address = await _context.Addresses
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(pickUp);
+            return View(address);
         }
 
-        // POST: PickUps/Delete/5
+        // POST: Addresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pickUp = await _context.PickUps.FindAsync(id);
-            _context.PickUps.Remove(pickUp);
+            var address = await _context.Addresses.FindAsync(id);
+            _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PickUpExists(int id)
+        private bool AddressExists(int id)
         {
-            return _context.PickUps.Any(e => e.PickUpId == id);
+            return _context.Addresses.Any(e => e.Id == id);
         }
     }
 }

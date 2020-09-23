@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector.Models.Employee>
+﻿@model IEnumerable<TrashCollector.Models.Address>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,37 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.firstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.phoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.street)
+                @Html.DisplayNameFor(model => model.streetAddress)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.apartmantOrSuiteNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.city)
+                @Html.DisplayNameFor(model => model.cityName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.state)
+                @Html.DisplayNameFor(model => model.stateName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.zipCode)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.cordinates)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -53,37 +38,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.phoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.street)
+                @Html.DisplayFor(modelItem => item.streetAddress)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.apartmantOrSuiteNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.city)
+                @Html.DisplayFor(modelItem => item.cityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.state)
+                @Html.DisplayFor(modelItem => item.stateName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.zipCode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cordinates)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

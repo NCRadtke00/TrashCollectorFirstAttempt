@@ -1,0 +1,59 @@
+﻿@model TrashCollector.Models.Address
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Address</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="streetAddress" class="control-label"></label>
+                <input asp-for="streetAddress" class="form-control" />
+                <span asp-validation-for="streetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apartmantOrSuiteNumber" class="control-label"></label>
+                <input asp-for="apartmantOrSuiteNumber" class="form-control" />
+                <span asp-validation-for="apartmantOrSuiteNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cityName" class="control-label"></label>
+                <input asp-for="cityName" class="form-control" />
+                <span asp-validation-for="cityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stateName" class="control-label"></label>
+                <input asp-for="stateName" class="form-control" />
+                <span asp-validation-for="stateName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="zipCode" class="control-label"></label>
+                <input asp-for="zipCode" class="form-control" />
+                <span asp-validation-for="zipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cordinates" class="control-label"></label>
+                <input asp-for="cordinates" class="form-control" />
+                <span asp-validation-for="cordinates" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

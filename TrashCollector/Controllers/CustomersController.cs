@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
@@ -22,7 +20,7 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
+            var applicationDbContext = _context.Customers.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.PickUp);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +33,9 @@ namespace TrashCollector.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.Address)
                 .Include(c => c.IdentityUser)
+                .Include(c => c.PickUp)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -48,7 +48,9 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["PickUpID"] = new SelectList(_context.PickUps, "PickUpId", "PickUpId");
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,street,city,state,zipCode,cordinates,initialPickUp,additionPickup,discontinuePickUps,pausePickUps,bill,hasTrashBeenCollected,wasRecyclingPickedUp,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,phoneNumber,PickUpID,initialPickUp,additionPickup,discontinuePickUps,pausePickUps,bill,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +67,9 @@ namespace TrashCollector.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["PickUpID"] = new SelectList(_context.PickUps, "PickUpId", "PickUpId", customer.PickUpID);
             return View(customer);
         }
 
@@ -82,7 +86,9 @@ namespace TrashCollector.Controllers
             {
                 return NotFound();
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["PickUpID"] = new SelectList(_context.PickUps, "PickUpId", "PickUpId", customer.PickUpID);
             return View(customer);
         }
 
@@ -91,7 +97,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,street,city,state,zipCode,cordinates,initialPickUp,additionPickup,discontinuePickUps,pausePickUps,bill,hasTrashBeenCollected,wasRecyclingPickedUp,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,phoneNumber,PickUpID,initialPickUp,additionPickup,discontinuePickUps,pausePickUps,bill,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -118,7 +124,9 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["PickUpID"] = new SelectList(_context.PickUps, "PickUpId", "PickUpId", customer.PickUpID);
             return View(customer);
         }
 
@@ -131,7 +139,9 @@ namespace TrashCollector.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.Address)
                 .Include(c => c.IdentityUser)
+                .Include(c => c.PickUp)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {

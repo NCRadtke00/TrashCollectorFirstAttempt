@@ -12,16 +12,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.employee)
+            @Html.DisplayNameFor(model => model.dayOfPickUp)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.employee.Id)
+            @Html.DisplayFor(model => model.dayOfPickUp)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customers)
+            @Html.DisplayNameFor(model => model.PickUpDay)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customers.Id)
+            @Html.DisplayFor(model => model.PickUpDay)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.customerTrashWasNotCollected)
@@ -35,9 +35,39 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.customerRecyclingWasNotCollected)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.discontinuePickUps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.discontinuePickUps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pausePickUps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pausePickUps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.bill)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bill)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customersId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.customersId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.employees)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.employees.Id)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.PickUpId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
