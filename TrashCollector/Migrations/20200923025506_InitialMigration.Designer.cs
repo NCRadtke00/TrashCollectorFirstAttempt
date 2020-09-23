@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
-namespace TrashCollector.Data.Migrations
+namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200923025506_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "60b910da-46a5-4bb3-9a0b-331419c3b834",
-                            ConcurrencyStamp = "e710bf91-585c-4010-a88a-e5f06faf487e",
+                            Id = "572fb366-3287-4412-a1da-cb71584d0dc0",
+                            ConcurrencyStamp = "01d76947-0961-46fc-bcd7-b79eb1dbaf09",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c135c80d-5aa0-463b-a5cf-bee775d3b614",
-                            ConcurrencyStamp = "2c716354-d8a0-4fa0-b7ce-e5bcf34f74b4",
+                            Id = "9ea0cee6-c4dc-4991-a42f-1b1085dc0f39",
+                            ConcurrencyStamp = "6cc07751-acff-4054-9b8a-e8915720dd68",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -325,6 +327,9 @@ namespace TrashCollector.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("customerRecyclingWasNotCollected")
                         .HasColumnType("bit");

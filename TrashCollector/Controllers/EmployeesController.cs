@@ -26,11 +26,13 @@ namespace TrashCollector.Controllers
         {
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
             //var applicationDbContext = _context.Employees.Include(e => e.IdentityUser).Single();
-            var customers = _context.Customers.Where(c => c.zipCode == employee.zipCode);
+            var customersInZipCode = _context.Customers.Where(c => c.zipCode == employeeLoggedIn.zipCode).ToList();
+            var today = DateTime.Now.DayOfWeek.ToString();
+            var customersInZipAndToday = customersInZipCode.Where(c => c.PickUp.Day == today).ToList();
             //ViewData["Customers"] = customers.ToList();
-            return View(customers.ToList());
+            return View();
         }
 
         // GET: Employees/Details/5
@@ -56,7 +58,9 @@ namespace TrashCollector.Controllers
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //var employee = new Employee();
             return View();
+            //return View(employee);
         }
 
         // POST: Employees/Create
@@ -65,26 +69,30 @@ namespace TrashCollector.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,firstName,lastName,street,city,state,zipCode,IdentityUserId")] Employee employee)
+        //public async IActionResult Create([Bind("Id,firstName,lastName,street,city,state,zipCode,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //employee.IdentityUserId = userId;
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
+                //_context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //GET: Employees/Edit/5
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = _context.Employees.Where(e => e.Id == id).SingleOrDefault();
             if (employee == null)
             {
                 return NotFound();
