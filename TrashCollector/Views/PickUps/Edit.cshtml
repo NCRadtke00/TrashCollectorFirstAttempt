@@ -13,11 +13,16 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PickUpId" />
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="dayOfPickUp" class="control-label"></label>
-                <input asp-for="dayOfPickUp" class="form-control" />
-                <span asp-validation-for="dayOfPickUp" class="text-danger"></span>
+                <label asp-for="GetCustomersId" class="control-label"></label>
+                <input asp-for="GetCustomersId" class="form-control" />
+                <span asp-validation-for="GetCustomersId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayOfWeek" class="control-label"></label>
+                <input asp-for="DayOfWeek" class="form-control" />
+                <span asp-validation-for="DayOfWeek" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PickUpDay" class="control-label"></label>
@@ -26,38 +31,28 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="customerTrashWasNotCollected" /> @Html.DisplayNameFor(model => model.customerTrashWasNotCollected)
+                    <input class="form-check-input" asp-for="CustomerTrashWasNotCollected" /> @Html.DisplayNameFor(model => model.CustomerTrashWasNotCollected)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="customerRecyclingWasNotCollected" /> @Html.DisplayNameFor(model => model.customerRecyclingWasNotCollected)
+                    <input class="form-check-input" asp-for="CustomerRecyclingWasNotCollected" /> @Html.DisplayNameFor(model => model.CustomerRecyclingWasNotCollected)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="discontinuePickUps" class="control-label"></label>
-                <input asp-for="discontinuePickUps" class="form-control" />
-                <span asp-validation-for="discontinuePickUps" class="text-danger"></span>
+                <label asp-for="DiscontinuePickUp" class="control-label"></label>
+                <input asp-for="DiscontinuePickUp" class="form-control" />
+                <span asp-validation-for="DiscontinuePickUp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="pausePickUps" class="control-label"></label>
-                <input asp-for="pausePickUps" class="form-control" />
-                <span asp-validation-for="pausePickUps" class="text-danger"></span>
+                <label asp-for="PausePickUp" class="control-label"></label>
+                <input asp-for="PausePickUp" class="form-control" />
+                <span asp-validation-for="PausePickUp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="bill" class="control-label"></label>
-                <input asp-for="bill" class="form-control" />
-                <span asp-validation-for="bill" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="customersId" class="control-label"></label>
-                <input asp-for="customersId" class="form-control" />
-                <span asp-validation-for="customersId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="employeesId" class="control-label"></label>
-                <select asp-for="employeesId" class="form-control" asp-items="ViewBag.employeesId"></select>
-                <span asp-validation-for="employeesId" class="text-danger"></span>
+                <label asp-for="Bill" class="control-label"></label>
+                <input asp-for="Bill" class="form-control" />
+                <span asp-validation-for="Bill" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

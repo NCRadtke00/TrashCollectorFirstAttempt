@@ -14,52 +14,52 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.firstName)
+                @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lastName)
+                @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.phoneNumber)
+                @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PickUp)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.initialPickUp)
+                @Html.DisplayNameFor(model => model.InitialPickUp)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.additionPickup)
+                @Html.DisplayNameFor(model => model.AdditionPickup)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.discontinuePickUps)
+                @Html.DisplayNameFor(model => model.DiscontinuePickUp)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.pausePickUps)
+                @Html.DisplayNameFor(model => model.PausePickUp)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.bill)
+                @Html.DisplayNameFor(model => model.Bill)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.street)
+                @Html.DisplayNameFor(model => model.Street)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.apartmantOrSuiteNumber)
+                @Html.DisplayNameFor(model => model.ApartmantOrSuiteNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.city)
+                @Html.DisplayNameFor(model => model.CityName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.state)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.zipCode)
+                @Html.DisplayNameFor(model => model.ZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cordinates)
+                @Html.DisplayNameFor(model => model.Cordinates)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdentityUser)
@@ -71,52 +71,52 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.firstName)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastName)
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.phoneNumber)
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PickUp.PickUpId)
+                @Html.DisplayFor(modelItem => item.PickUp.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.initialPickUp)
+                @Html.DisplayFor(modelItem => item.InitialPickUp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.additionPickup)
+                @Html.DisplayFor(modelItem => item.AdditionPickup)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.discontinuePickUps)
+                @Html.DisplayFor(modelItem => item.DiscontinuePickUp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.pausePickUps)
+                @Html.DisplayFor(modelItem => item.PausePickUp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.bill)
+                @Html.DisplayFor(modelItem => item.Bill)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.street)
+                @Html.DisplayFor(modelItem => item.Street)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.apartmantOrSuiteNumber)
+                @Html.DisplayFor(modelItem => item.ApartmantOrSuiteNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.city)
+                @Html.DisplayFor(modelItem => item.CityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.state)
+                @Html.DisplayFor(modelItem => item.StateName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.zipCode)
+                @Html.DisplayFor(modelItem => item.ZipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cordinates)
+                @Html.DisplayFor(modelItem => item.Cordinates)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdentityUser.Id)

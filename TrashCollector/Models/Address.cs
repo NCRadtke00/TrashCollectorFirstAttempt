@@ -10,11 +10,11 @@ namespace TrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        public string streetAddress { get; set; }
-        public string apartmantOrSuiteNumber { get; set; }
-        public string cityName { get; set; }
-        public string stateName { get; set; }
-        public string zipCode { get; set; }
-        public string cordinates { get; set; }
+        public string StreetAddress { get; set; }
+        public string ApartmantOrSuiteNumber { get; set; }
+        public string CityName { get; set; }
+        public string StateName { get; set; }
+        public string ZipCode { get; set; }
+        public string Cordinates { get; set; }
     }
 }

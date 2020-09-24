@@ -13,10 +13,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dayOfPickUp)
+            @Html.DisplayNameFor(model => model.GetCustomersId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dayOfPickUp)
+            @Html.DisplayFor(model => model.GetCustomersId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DayOfWeek)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PickUpDay)
@@ -25,51 +31,39 @@
             @Html.DisplayFor(model => model.PickUpDay)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customerTrashWasNotCollected)
+            @Html.DisplayNameFor(model => model.CustomerTrashWasNotCollected)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customerTrashWasNotCollected)
+            @Html.DisplayFor(model => model.CustomerTrashWasNotCollected)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customerRecyclingWasNotCollected)
+            @Html.DisplayNameFor(model => model.CustomerRecyclingWasNotCollected)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customerRecyclingWasNotCollected)
+            @Html.DisplayFor(model => model.CustomerRecyclingWasNotCollected)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.discontinuePickUps)
+            @Html.DisplayNameFor(model => model.DiscontinuePickUp)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.discontinuePickUps)
+            @Html.DisplayFor(model => model.DiscontinuePickUp)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pausePickUps)
+            @Html.DisplayNameFor(model => model.PausePickUp)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pausePickUps)
+            @Html.DisplayFor(model => model.PausePickUp)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bill)
+            @Html.DisplayNameFor(model => model.Bill)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bill)
+            @Html.DisplayFor(model => model.Bill)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customersId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customersId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.employees)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.employees.Id)
-        </dd class>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="PickUpId" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -54,7 +54,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,streetAddress,apartmantOrSuiteNumber,cityName,stateName,zipCode,cordinates")] Address address)
+        public async Task<IActionResult> Create([Bind("Id,StreetAddress,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates")] Address address)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,streetAddress,apartmantOrSuiteNumber,cityName,stateName,zipCode,cordinates")] Address address)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StreetAddress,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates")] Address address)
         {
             if (id != address.Id)
             {

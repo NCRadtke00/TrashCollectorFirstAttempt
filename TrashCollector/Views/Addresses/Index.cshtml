@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.streetAddress)
+                @Html.DisplayNameFor(model => model.StreetAddress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.apartmantOrSuiteNumber)
+                @Html.DisplayNameFor(model => model.ApartmantOrSuiteNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cityName)
+                @Html.DisplayNameFor(model => model.CityName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.stateName)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.zipCode)
+                @Html.DisplayNameFor(model => model.ZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cordinates)
+                @Html.DisplayNameFor(model => model.Cordinates)
             </th>
             <th></th>
         </tr>
@@ -38,22 +38,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.streetAddress)
+                @Html.DisplayFor(modelItem => item.StreetAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.apartmantOrSuiteNumber)
+                @Html.DisplayFor(modelItem => item.ApartmantOrSuiteNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cityName)
+                @Html.DisplayFor(modelItem => item.CityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.stateName)
+                @Html.DisplayFor(modelItem => item.StateName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.zipCode)
+                @Html.DisplayFor(modelItem => item.ZipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cordinates)
+                @Html.DisplayFor(modelItem => item.Cordinates)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

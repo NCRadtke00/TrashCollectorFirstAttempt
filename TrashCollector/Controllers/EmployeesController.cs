@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,8 +23,12 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.Address).Include(e => e.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
+            var customerInZipCode = _context.Customers.Where(c => c.Address.ZipCode == employeeLoggedIn.ZipCode).ToList();
+            var today = DateTime.Now.DayOfWeek.ToString();
+            var customersInZipAndToday = customerInZipCode.Where(c => c.PickUp.DayOfWeek == today).ToList();
+            return View();
         }
 
         // GET: Employees/Details/5
@@ -59,7 +64,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,firstName,lastName,phoneNumber,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhosneNumber,AddressId,Street,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +100,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,firstName,lastName,phoneNumber,AddressId,street,apartmantOrSuiteNumber,city,state,zipCode,cordinates,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhosneNumber,AddressId,Street,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates,IdentityUserId")] Employee employee)
         {
             if (id != employee.Id)
             {

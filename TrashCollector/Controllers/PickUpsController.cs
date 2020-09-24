@@ -22,8 +22,7 @@ namespace TrashCollector.Controllers
         // GET: PickUps
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PickUps.Include(p => p.employees);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.PickUps.ToListAsync());
         }
 
         // GET: PickUps/Details/5
@@ -35,8 +34,7 @@ namespace TrashCollector.Controllers
             }
 
             var pickUp = await _context.PickUps
-                .Include(p => p.employees)
-                .FirstOrDefaultAsync(m => m.PickUpId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (pickUp == null)
             {
                 return NotFound();
@@ -48,7 +46,6 @@ namespace TrashCollector.Controllers
         // GET: PickUps/Create
         public IActionResult Create()
         {
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PickUpId,dayOfPickUp,PickUpDay,customerTrashWasNotCollected,customerRecyclingWasNotCollected,discontinuePickUps,pausePickUps,bill,customersId,employeesId")] PickUp pickUp)
+        public async Task<IActionResult> Create([Bind("Id,GetCustomersId,DayOfWeek,PickUpDay,CustomerTrashWasNotCollected,CustomerRecyclingWasNotCollected,DiscontinuePickUp,PausePickUp,Bill")] PickUp pickUp)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace TrashCollector.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
             return View(pickUp);
         }
 
@@ -82,7 +78,6 @@ namespace TrashCollector.Controllers
             {
                 return NotFound();
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
             return View(pickUp);
         }
 
@@ -91,9 +86,9 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PickUpId,dayOfPickUp,PickUpDay,customerTrashWasNotCollected,customerRecyclingWasNotCollected,discontinuePickUps,pausePickUps,bill,customersId,employeesId")] PickUp pickUp)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GetCustomersId,DayOfWeek,PickUpDay,CustomerTrashWasNotCollected,CustomerRecyclingWasNotCollected,DiscontinuePickUp,PausePickUp,Bill")] PickUp pickUp)
         {
-            if (id != pickUp.PickUpId)
+            if (id != pickUp.Id)
             {
                 return NotFound();
             }
@@ -107,7 +102,7 @@ namespace TrashCollector.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PickUpExists(pickUp.PickUpId))
+                    if (!PickUpExists(pickUp.Id))
                     {
                         return NotFound();
                     }
@@ -118,7 +113,6 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["employeesId"] = new SelectList(_context.Employees, "Id", "Id", pickUp.employeesId);
             return View(pickUp);
         }
 
@@ -131,8 +125,7 @@ namespace TrashCollector.Controllers
             }
 
             var pickUp = await _context.PickUps
-                .Include(p => p.employees)
-                .FirstOrDefaultAsync(m => m.PickUpId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (pickUp == null)
             {
                 return NotFound();
@@ -154,7 +147,7 @@ namespace TrashCollector.Controllers
 
         private bool PickUpExists(int id)
         {
-            return _context.PickUps.Any(e => e.PickUpId == id);
+            return _context.PickUps.Any(e => e.Id == id);
         }
     }
 }
