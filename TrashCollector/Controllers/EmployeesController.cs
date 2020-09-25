@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TrashCollector.Data;
 using TrashCollector.Models;
+
 
 namespace TrashCollector.Controllers
 {
@@ -24,7 +26,11 @@ namespace TrashCollector.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
+            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            if (employeeLoggedIn == null)
+            {
+                return RedirectToAction("Create");
+            }
             var customerInZipCode = _context.Customers.Where(c => c.Address.ZipCode == employeeLoggedIn.ZipCode).ToList();
             var today = DateTime.Now.DayOfWeek.ToString();
             var customersInZipAndToday = customerInZipCode.Where(c => c.PickUp.DayOfWeek == today).ToList();
@@ -68,7 +74,13 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (employee.Id == 0)
+                {
+                    employee.IdentityUserId = userId;
+                    _context.Add(employee);
+                    _context.SaveChanges();
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -100,23 +112,30 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhosneNumber,AddressId,Street,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
-            if (id != employee.Id)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(employee);
+                    if (customer.TrashWasNotCollected == false)
+                    {
+                        customer.Bill = 50;
+                        if(customer.RecyclingWasNotCollected == false)
+                        {
+                            customer.Bill = 25;
+                        }
+                    }
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.Id))
+                    if (!EmployeeExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -127,9 +146,9 @@ namespace TrashCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", employee.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", customer.AddressId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
 
         // GET: Employees/Delete/5

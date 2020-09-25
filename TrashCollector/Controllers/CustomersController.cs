@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,8 +23,13 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.PickUp);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customerLoggedIn = _context.Customers.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            if(customerLoggedIn == null)
+            {
+                return RedirectToAction("Create");
+            }
+            return View(await _context.Customers.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -61,11 +67,18 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,PickUpID,InitialPickUp,AdditionPickup,DiscontinuePickUp,PausePickUp,Bill,AddressId,Street,ApartmantOrSuiteNumber,CityName,StateName,ZipCode,Cordinates,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Create (Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if( customer.Id == 0)
+                {
+                    customer.IdentityUserId = userId;
+                    _context.Add(customer);
+                    _context.SaveChanges();
+                }
+               
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
