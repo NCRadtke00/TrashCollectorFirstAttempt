@@ -16,8 +16,11 @@ namespace TrashCollector.Models
         [DefaultValue(true)]
         public bool IsAccActive { get; set; }
         [Display(Name = "Start Account Suspension")]
-        public DateTime? StartSuspension { get; set; }
+        public DateTime? StartAccSuspension { get; set; }
         [Display(Name = "End Account Suspension")]
+        public DateTime? EndAccSuspension { get; set; }
+        [Display(Name = "Extra Pickup")]
+        public DateTime? ExtraPickup { get; set; }
 
     }
 }
