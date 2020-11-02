@@ -19,12 +19,17 @@ namespace TrashCollector.Data
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
                 .HasData(
-                    new IdentityRole ()
+                    new IdentityRole()
                     {
-                        Name = "Customer", 
-                        NormalizedName = "CUSTOMER" 
+                        Name = "Admin",
+                        NormalizedName = "ADMIN"
                     },
-                    new IdentityRole ()
+                    new IdentityRole()
+                    {
+                        Name = "Customer",
+                        NormalizedName = "CUSTOMER"
+                    },
+                    new IdentityRole()
                     {
                         Name = "Employee",
                         NormalizedName = "EMPLOYEE"
@@ -32,10 +37,10 @@ namespace TrashCollector.Data
 
                 );
         }
-        public DbSet<TrashCollector.Models.Customer> Customers { get; set; }
-        public DbSet<TrashCollector.Models.Employee> Employees { get; set; }
-        public DbSet<TrashCollector.Models.PickUp>  PickUps { get; set; }
-        public DbSet<TrashCollector.Models.Address> Addresses { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Services> Services { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
     }
 }
