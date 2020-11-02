@@ -20,31 +20,12 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
-
-      
-        [ForeignKey("PickUp")]
-        public int PickUpID { get; set; }
-        public PickUp PickUp { get; set; }
-        [DisplayName("Initial PickUp")]
-        public string InitialPickUp { get; set; }
-        [DisplayName("Additional PickUp")]
-        public string AdditionalPickup { get; set; }
-        [DisplayName("Discontinue PickUp")]
-        public string DiscontinuePickUp { get; set; }
-        [DisplayName("Pause PickUp")]
-        public string PausePickUp { get; set; }
-        [DisplayName("Trash Was Not Collected")]
-        public bool TrashWasNotCollected { get; set; }
-        [DisplayName("Recycling Was Not Collected")]
-        public bool RecyclingWasNotCollected { get; set; }
-        [DisplayName("Bill")]
-        public double Bill { get; set; } //decimal?
-
+        [ForeignKey("Service")]
+        public int? ServiceId { get; set; }
+        public Services Service { get; set; }
         [ForeignKey("Address")]
         public int AddressId { get; set; }
         public Address Address { get; set; }
-        
-
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
