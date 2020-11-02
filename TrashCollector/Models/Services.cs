@@ -21,6 +21,8 @@ namespace TrashCollector.Models
         public DateTime? EndAccSuspension { get; set; }
         [Display(Name = "Extra Pickup")]
         public DateTime? ExtraPickup { get; set; }
+        [Display(Name = "Pickup Day")]
+        public DayOfWeek PickupDay { get; set; }
 
     }
 }
