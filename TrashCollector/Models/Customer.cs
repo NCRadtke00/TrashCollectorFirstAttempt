@@ -14,7 +14,6 @@ namespace TrashCollector.Models
 
         [Key]
         public int Id { get; set; }
-        public string CustomerId { get; }
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
@@ -44,18 +43,7 @@ namespace TrashCollector.Models
         [ForeignKey("Address")]
         public int AddressId { get; set; }
         public Address Address { get; set; }
-        [DisplayName("Street")]
-        public string Street { get; set; }
-        [DisplayName("Apartmant Or Suite Number")]
-        public string ApartmantOrSuiteNumber { get; set; }
-        [DisplayName("City Name")]
-        public string CityName { get; set; }
-        [DisplayName("State Name")]
-        public string StateName { get; set; }
-        [DisplayName("Zip Code")]
-        public string ZipCode { get; set; }
-        [DisplayName("Cordinates")]
-        public string Cordinates { get; set; }
+        
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
