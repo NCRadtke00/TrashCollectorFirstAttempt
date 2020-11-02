@@ -23,6 +23,9 @@ namespace TrashCollector.Models
         public DateTime? ExtraPickup { get; set; }
         [Display(Name = "Pickup Day")]
         public DayOfWeek PickupDay { get; set; }
+        public double Balance { get; set; }
+        [Display(Name = "Was Trash Picked Up")]
+        public bool WasPickedUp { get; set; }
 
     }
 }
